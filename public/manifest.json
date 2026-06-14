@@ -1,0 +1,22 @@
+{
+  "short_name": "IRIS",
+  "name": "IRIS Browser",
+  "description": "Next-generation AI-powered research and study browser.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0E0F14",
+  "theme_color": "#6C7AFF",
+  "display": "standalone",
+  "orientation": "portrait"
+}

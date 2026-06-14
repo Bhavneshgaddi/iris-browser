@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Allow text selection inside webview and inputs */
+input, textarea, [contenteditable] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── Focus Ring ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #6C7AFF;
+  outline-offset: 1px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Jarvis Utility Classes ───────────────────────────────────────────────── */
+@layer components {
+  .jarvis-surface {
+    @apply bg-jarvis-surface border border-jarvis-border;
+  }
+  .jarvis-surface-el {
+    @apply bg-jarvis-surfaceEl;
+  }
+  .jarvis-text {
+    @apply text-jarvis-text;
+  }
+  .jarvis-text-muted {
+    @apply text-jarvis-textMuted;
+  }
+  .jarvis-btn {
+    @apply flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium
+           transition-all duration-150 cursor-pointer select-none
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .jarvis-btn-icon {
+    @apply flex items-center justify-center w-8 h-8 rounded-md
+           text-jarvis-textMuted hover:text-jarvis-text hover:bg-white/5
+           active:scale-95 transition-all duration-100 cursor-pointer;
+  }
+  .jarvis-btn-primary {
+    @apply jarvis-btn bg-jarvis-accent text-white hover:bg-jarvis-accentHi
+           active:scale-[0.98] shadow-glow-sm;
+  }
+  .jarvis-input {
+    @apply w-full bg-jarvis-surfaceEl border border-jarvis-border rounded-md
+           px-3 py-2 text-sm text-jarvis-text placeholder:text-jarvis-textDim
+           focus:outline-none focus:border-jarvis-accent focus:ring-1 focus:ring-jarvis-accent/30
+           transition-colors duration-150;
+  }
+  .jarvis-panel {
+    @apply bg-jarvis-surface border-l border-jarvis-border flex flex-col h-full;
+  }
+  .jarvis-divider {
+    @apply border-t border-jarvis-border;
+  }
+
+  /* Light mode overrides */
+  .light .jarvis-btn-icon {
+    @apply text-jarvisLight-textMuted hover:text-jarvisLight-text hover:bg-black/5;
+  }
+}
+
+/* ── Webview ──────────────────────────────────────────────────────────────── */
+webview {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── No-drag region for titlebar buttons ─────────────────────────────────── */
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+.drag {
+  -webkit-app-region: drag;
+}
+
+/* ── Tab transition ───────────────────────────────────────────────────────── */
+.tab-enter {
+  animation: tabIn 150ms ease-out;
+}
+@keyframes tabIn {
+  from { opacity: 0; transform: scale(0.9) translateY(-4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────────── */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1E2030;
+  color: #E4E6F0;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 9999;
+  border: 1px solid #2A2D3E;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+}

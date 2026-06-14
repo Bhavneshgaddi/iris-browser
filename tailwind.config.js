@@ -1,0 +1,90 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        // Jarvis Design System — deep space meets intelligence
+        jarvis: {
+          bg:        '#0E0F14',
+          surface:   '#161822',
+          surfaceEl: '#1E2030',
+          border:    '#2A2D3E',
+          borderHi:  '#3D4160',
+          accent:    '#6C7AFF',
+          accentLo:  '#4A56D4',
+          accentHi:  '#8B96FF',
+          text:      '#E4E6F0',
+          textMuted: '#7B7F96',
+          textDim:   '#4A4D62',
+          green:     '#4ECDC4',
+          amber:     '#FFB347',
+          red:       '#FF6B6B',
+          purple:    '#B87FFF',
+        },
+        // Light mode
+        jarvisLight: {
+          bg:        '#F5F6FA',
+          surface:   '#FFFFFF',
+          surfaceEl: '#EEF0F8',
+          border:    '#D8DBE8',
+          borderHi:  '#B8BDD4',
+          accent:    '#4A56D4',
+          accentLo:  '#3644BE',
+          accentHi:  '#6C7AFF',
+          text:      '#1A1C2E',
+          textMuted: '#6B6F87',
+          textDim:   '#A8ACBF',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Cal Sans', 'Inter var', 'sans-serif'],
+      },
+      fontSize: {
+        '2xs': ['10px', '14px'],
+        xs:    ['11px', '16px'],
+        sm:    ['12px', '18px'],
+        base:  ['13px', '20px'],
+        md:    ['14px', '20px'],
+        lg:    ['16px', '24px'],
+        xl:    ['18px', '26px'],
+        '2xl': ['22px', '30px'],
+      },
+      borderRadius: {
+        sm: '4px',
+        md: '6px',
+        lg: '10px',
+        xl: '14px',
+        '2xl': '20px',
+      },
+      boxShadow: {
+        'glow-accent': '0 0 20px rgba(108, 122, 255, 0.15)',
+        'glow-sm':     '0 0 10px rgba(108, 122, 255, 0.08)',
+        'panel':       '0 4px 24px rgba(0,0,0,0.4)',
+        'tooltip':     '0 8px 32px rgba(0,0,0,0.5)',
+      },
+      animation: {
+        'fade-in':     'fadeIn 150ms ease-out',
+        'slide-down':  'slideDown 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'slide-up':    'slideUp 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'scale-in':    'scaleIn 120ms ease-out',
+        'spin-slow':   'spin 2s linear infinite',
+        'pulse-glow':  'pulseGlow 2s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeIn:    { from: { opacity: '0' }, to: { opacity: '1' } },
+        slideDown: { from: { opacity: '0', transform: 'translateY(-6px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        slideUp:   { from: { opacity: '0', transform: 'translateY(6px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        scaleIn:   { from: { opacity: '0', transform: 'scale(0.95)' }, to: { opacity: '1', transform: 'scale(1)' } },
+        pulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 10px rgba(108,122,255,0.2)' },
+          '50%':      { boxShadow: '0 0 20px rgba(108,122,255,0.4)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
