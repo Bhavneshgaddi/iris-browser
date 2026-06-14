@@ -66,22 +66,40 @@ function WebViewTab({ tab, isActive, updateTab }: WebViewTabProps) {
 
   if (!isElectron) {
     return (
-      <iframe
-        id={`webview-${tab.id}`}
-        src={tab.url}
-        className="w-full h-full border-none"
-        title={tab.title}
-        onLoad={() => {
-          updateTab(tab.id, {
-            isLoading: false,
-            status: 'complete',
-            title: tab.title || tab.url,
-          })
-          if (tab.url && !tab.url.startsWith('iris://') && !tab.url.startsWith('jarvis://')) {
-            window.jarvis?.history.add({ url: tab.url, title: tab.title || tab.url })
-          }
-        }}
-      />
+      <div className="relative w-full h-full flex flex-col">
+        {/* Web Mode Iframe Header Helper */}
+        <div className="bg-jarvis-surfaceEl border-b border-jarvis-border px-3 py-2 flex items-center justify-between text-2xs text-jarvis-text flex-shrink-0">
+          <span className="truncate pr-2 opacity-80">
+            ⚠️ Standard web/mobile browsers block embedding Google/YouTube. If the page below is blank/blocked:
+          </span>
+          <a
+            href={tab.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 px-2.5 py-1 rounded bg-jarvis-accent hover:bg-jarvis-accentHi text-white font-medium transition-colors"
+          >
+            Open Link ↗
+          </a>
+        </div>
+        <div className="flex-1 w-full h-full relative">
+          <iframe
+            id={`webview-${tab.id}`}
+            src={tab.url}
+            className="absolute inset-0 w-full h-full border-none"
+            title={tab.title}
+            onLoad={() => {
+              updateTab(tab.id, {
+                isLoading: false,
+                status: 'complete',
+                title: tab.title || tab.url,
+              })
+              if (tab.url && !tab.url.startsWith('iris://') && !tab.url.startsWith('jarvis://')) {
+                window.jarvis?.history.add({ url: tab.url, title: tab.title || tab.url })
+              }
+            }}
+          />
+        </div>
+      </div>
     )
   }
 
